@@ -1,0 +1,6 @@
+# Clase de Roles y permisos
+En esta actividad se ejecutó la migración de **Spatie** para crear las tablas intermedias en MySQL, como `roles`, `permissions` y `model_has_roles`, que permiten relacionar a los usuarios con sus funciones y permisos dentro del sistema.
+* **Con `RolePermissionSeeder`**, se automatiza la creación de roles, por ejemplo, `admin` y `vendedor`. Además, se les asignan permisos como `crear-productos`, `editar-productos` y `eliminar-productos`.
+* **En los controladores de Producto y Categoría** se agregaron reglas de middleware. Esto permite controlar el acceso a determinadas rutas. Por ejemplo, si un usuario intenta entrar a una ruta de eliminación sin tener los permisos necesarios, el acceso se detiene.
+* **Se realizó la migración de Soft Deletes** para agregar la columna `deleted_at` (de tipo *timestamp* y que permite valores nulos) a las tablas `productos` y `categorias`.
+* **Se agregó el trait `SoftDeletes` en los modelos Producto y Categoría**, importando la clase `Illuminate\Database\Eloquent\SoftDeletes`. Esto le permite al ORM de Laravel manejar las eliminaciones de forma lógica. Cuando un usuario elimina un registro desde la vista, este desaparece de la interfaz, pero se conserva en la base de datos, lo que permite mantener la trazabilidad de la información.
